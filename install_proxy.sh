@@ -1,5 +1,6 @@
 #!/bin/basg
-# Source: https://github.com/zabbix/zabbix-docker.git
+# Source: https://github.com/JackExperts/maas-scripts.git
+# Local do script: https://raw.githubusercontent.com/JackExperts/maas-scripts/main/install_proxy.sh
 
 ## Instalacao Docker
 curl https://get.docker.com | bash
@@ -40,4 +41,14 @@ ZBX_HISTORYINDEXCACHESIZE=64M
 ZBX_TIMEOUT=30" > ./env_vars/.env_prx
 
 ## Download subida do proxy
-# curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
+
+## Download script de gestao
+curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/proxy-maas.sh -o ./proxy-maas.sh
+chmod +x ./proxy-maas.sh
+
+## subida do proxy
+echo -e "Para gerenciar o processo, utilize o script proxy-maas.sh."
+./proxy-maas.sh
+
+docker-compose up -d && echo -e "Ambiente instalado e iniciado com sucesso!!! \n"
