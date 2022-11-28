@@ -2,8 +2,6 @@ version: '3.5'
 services:
  zabbix-proxy-sqlite3:
   image: zabbix-proxy-sqlite3:centos-6.2-latest
-  profiles:
-   - all
   ports:
    - "10061:10051"
   volumes:
@@ -48,9 +46,6 @@ services:
 
  zabbix-agent:
   image: zabbix-agent:6.2-centos-latest
-  profiles:
-   - full
-   - all
   ports:
    - "10050:10050"
   volumes:
