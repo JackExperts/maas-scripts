@@ -1,0 +1,43 @@
+#!/bin/basg
+# Source: https://github.com/zabbix/zabbix-docker.git
+
+## Instalacao Docker
+curl https://get.docker.com | bash
+
+## Instalacao Docker Compose
+curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+## Definicoes do proxy
+read -p "Informe o hostname do proxy: " ZBX_HOSTNAME
+read -p "Informe o hostname do MaaS: " ZBX_SERVER_HOST
+
+echo -e "
+ZBX_PROXYMODE=0
+ZBX_SERVER_HOST=$ZBX_SERVER_HOST
+ZBX_SERVER_PORT=10051 # Deprecated since 6.0.0
+ZBX_HOSTNAME=$ZBX_HOSTNAME
+ZBX_ENABLEREMOTECOMMANDS=1 # Available since 3.4.0
+ZBX_LOGREMOTECOMMANDS=1 # Available since 3.4.0
+ZBX_HOSTNAMEITEM=system.hostname
+ZBX_DEBUGLEVEL=3
+ZBX_PROXYLOCALBUFFER=12
+ZBX_PROXYOFFLINEBUFFER=72
+ZBX_PROXYHEARTBEATFREQUENCY=60
+ZBX_CONFIGFREQUENCY=120
+ZBX_DATASENDERFREQUENCY=1
+ZBX_STARTPOLLERS=20
+ZBX_STARTPOLLERSUNREACHABLE=10
+ZBX_STARTTRAPPERS=5
+ZBX_STARTPINGERS=10
+ZBX_STARTDISCOVERERS=4
+ZBX_STARTHTTPPOLLERS=5
+ZBX_HOUSEKEEPINGFREQUENCY=1
+ZBX_CACHESIZE=128M
+ZBX_STARTDBSYNCERS=4
+ZBX_HISTORYCACHESIZE=128M
+ZBX_HISTORYINDEXCACHESIZE=64M
+ZBX_TIMEOUT=30" > ./env_vars/.env_prx
+
+## Download subida do proxy
+# curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
