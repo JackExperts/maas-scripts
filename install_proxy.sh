@@ -41,10 +41,10 @@ ZBX_HISTORYINDEXCACHESIZE=64M
 ZBX_TIMEOUT=30" > ./env_vars/.env_prx
 
 ## Download subida do proxy
-curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
+rm -rf ./docker-compose.yaml && curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
 
 ## Download script de gestao
-curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/proxy-maas.sh -o ./proxy-maas.sh
+rm -rf ./proxy-maas.sh && curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/proxy-maas.sh -o ./proxy-maas.sh
 chmod +x ./proxy-maas.sh
 
 ## subida do proxy
