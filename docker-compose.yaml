@@ -27,8 +27,7 @@ services:
       cpus: '0.3'
       memory: 256M
   env_file:
-   - ./env_vars/.env_prx
-   - ./env_vars/.env_prx_sqlite3
+   - .env_prx
   networks:
    zbx_net_backend:
     aliases:
@@ -65,7 +64,7 @@ services:
       memory: 64M
    mode: global
   env_file:
-   - ./env_vars/.env_agent
+   - .env_agent
   privileged: true
   pid: "host"
   networks:

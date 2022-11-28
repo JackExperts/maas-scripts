@@ -38,7 +38,15 @@ ZBX_CACHESIZE=128M
 ZBX_STARTDBSYNCERS=4
 ZBX_HISTORYCACHESIZE=128M
 ZBX_HISTORYINDEXCACHESIZE=64M
-ZBX_TIMEOUT=30" > ./env_vars/.env_prx
+ZBX_TIMEOUT=30" > .env_prx
+
+echo -e "
+ZBX_ENABLEREMOTECOMMANDS=1 # Deprecated since 5.0.0
+ZBX_LOGREMOTECOMMANDS=1
+ZBX_SERVER_HOST=$ZBX_SERVER_HOST
+ZBX_HOSTNAME=$ZBX_HOSTNAME
+ZBX_HOSTNAMEITEM=system.hostname
+ZBX_TIMEOUT=30" > .env_agent
 
 ## Download subida do proxy
 rm -rf ./docker-compose.yaml && curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
