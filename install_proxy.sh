@@ -1,4 +1,4 @@
-#!/bin/basg
+#!/bin/bash
 # Source: https://github.com/JackExperts/maas-scripts.git
 # Local do script: https://raw.githubusercontent.com/JackExperts/maas-scripts/main/install_proxy.sh
 
