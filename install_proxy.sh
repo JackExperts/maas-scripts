@@ -2,16 +2,17 @@
 # Source: https://github.com/JackExperts/maas-scripts.git
 # Local do script: https://raw.githubusercontent.com/JackExperts/maas-scripts/main/install_proxy.sh
 
+
 ## Instalacao Docker
-curl https://get.docker.com | bash
+curl -s https://get.docker.com | bash
 
 ## Instalacao Docker Compose
-curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+curl -s -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 ## Definicoes do proxy
-read -p "Informe o hostname do proxy: " ZBX_HOSTNAME
-read -p "Informe o hostname do MaaS: " ZBX_SERVER_HOST
+[ -n "$ZBX_HOSTNAME" ] || (read -p "Informe o hostname do proxy: " ZBX_HOSTNAME)
+[ -n "$ZBX_SERVER_HOST" ] || (read -p "Informe o hostname do MaaS: " ZBX_SERVER_HOST)
 
 echo -e "
 ZBX_PROXYMODE=0
@@ -47,10 +48,10 @@ ZBX_HOSTNAMEITEM=system.hostname
 ZBX_TIMEOUT=30" > .env_agent
 
 ## Download subida do proxy
-rm -rf ./docker-compose.yaml && curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
+rm -rf ./docker-compose.yaml && curl -s -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
 
 ## Download script de gestao
-rm -rf ./proxy-maas.sh && curl -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/proxy-maas.sh -o ./proxy-maas.sh
+rm -rf ./proxy-maas.sh && curl -s -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/proxy-maas.sh -o ./proxy-maas.sh
 chmod +x ./proxy-maas.sh
 
 ## subida do proxy
