@@ -2,6 +2,7 @@
 # Source: https://github.com/JackExperts/maas-scripts.git
 # Local do script: https://raw.githubusercontent.com/JackExperts/maas-scripts/main/install_proxy.sh
 
+script_manager=manager_container_docker.sh
 
 ## Instalacao Docker
 curl -s https://get.docker.com | bash
@@ -51,11 +52,11 @@ ZBX_TIMEOUT=30" > .env_agent
 rm -rf ./docker-compose.yaml && curl -s -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/docker-compose.yaml -o ./docker-compose.yaml
 
 ## Download script de gestao
-rm -rf ./proxy-maas.sh && curl -s -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/proxy-maas.sh -o ./proxy-maas.sh
-chmod +x ./proxy-maas.sh
+rm -rf ./script_manager && curl -s -L https://raw.githubusercontent.com/JackExperts/maas-scripts/main/script_manager -o ./$script_manager
+chmod +x ./$script_manager
 
 ## subida do proxy
-echo -e "Para gerenciar o processo, utilize o script proxy-maas.sh."
-./proxy-maas.sh
+echo -e "Para gerenciar o processo, utilize o script $script_manager."
+./$script_manager
 
 docker-compose up -d && echo -e "Ambiente instalado e iniciado com sucesso!!! \n"
