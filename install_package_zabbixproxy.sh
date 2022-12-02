@@ -2,7 +2,7 @@
 
 ##### Variaveis para os arquivos: /etc/zabbix/zabbix_proxy.conf e /etc/zabbix/zabbix_agent2.conf
 
-ServerProxy=ip_do_server
+ServerProxy=$ZBX_SERVER_HOST
 
 ###############################################
 
@@ -487,7 +487,7 @@ echo ""
 echo "${green}-------------- Verificando informações do host --------------${reset}"; sleep 2
 echo ""
 
-if [ "$1" = 'change' ] && [ -n "$2" ]; then
+if [ -n $ZBX_HOSTNAME ] && [ "$1" = 'change' ] && [ -n "$2" ]; then
     # Se a posição 1 é "change" e o valor do string da posição 2 não é zero, faça esse para trocar o hostname:
     echo "Antigo hostname: `cat /etc/hostname`"
     echo "Novo hostname: $2"
@@ -508,6 +508,9 @@ elif [ "$1" = 'run' ]; then
     echo ""
     echo 'Executando a instalação sem trocar o hostname'
 	echo ""
+elif [ "$ZBX_HOSTNAME" != "" ]; then
+    HOSTNAME=$ZBX_HOSTNAME
+		echo $HOSTNAME
 else
     hostnamectl_grep
     # Chama a função para seguir com o case normal porque não inseriu um parâmetro

@@ -21,18 +21,32 @@ Projeto para publicação de scripts genérico para execuções remotas.
 
 - Execute o script de instalação:
 
-  ```bash
-  chmod +x install_proxy.sh
-  ```
-  ```bash
-  ./install_proxy.sh
-  ```
+    > **ATENÇÃO**
+  - Instalação via pacote (suporta: Debian 9, 10 e 11, CentOS 7, 8 e 0 e RedHat 8):
 
-- Pronto, seu Zabbix deve ter iniciado! Para gerenciar o processo, utilize o script proxy-maas.sh.
+    ```bash
+    chmod +x install_package_zabbixproxy.sh
+    ```
+    ```bash
+    ./install_package_zabbixproxy.sh
+    ```
+
+  - Instalação via Docker (Não suporta CentOS ou RedHat 8)
+
+    ```bash
+    chmod +x install_docker_zabbixproxy.sh
+    ```
+    ```bash
+    ./install_docker_zabbixproxy.sh
+    ```
+
+- Pronto, seu Zabbix deve ter iniciado! 
+
+  - Para gerenciar o container Docker, disponibilizamos o script abaixo.
 
   ```bash
-  chmod +x proxy-maas.sh
+  chmod +x manager_container_docker.sh
   ```
   ```bash
-  ./proxy-maas.sh
+  ./manager_container_docker.sh
   ```
